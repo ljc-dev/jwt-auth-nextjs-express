@@ -1,4 +1,5 @@
 const express = require("express")
+const { RedisCache } = require("apollo-server-cache-redis")
 const { ApolloServer } = require("apollo-server-express")
 const cookieParser = require("cookie-parser")
 const { typeDefs, resolvers } = require("./lib/schemas")
@@ -7,6 +8,7 @@ const { findUserById } = require("./lib/user")
 const cors = require("cors")
 
 const app = express()
+
 app.use(cors({
     origin: "http://localhost:3000",
     credentials: true
@@ -46,7 +48,8 @@ app.post("/refresh-token", async (req, res) => {
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: ({ req, res }) => ({ req, res })
+    context: ({ req, res }) => ({ req, res }),
+    cache: new RedisCache() //comment this line if you don't have a redis server running
 })
 
 server.applyMiddleware({ app, cors: false })

@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "apollo-server-cache-redis": "^1.1.6",
     "apollo-server-express": "^2.12.0",
     "bcrypt": "^4.0.1",
     "cookie-parser": "^1.4.5",
