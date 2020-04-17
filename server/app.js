@@ -19,7 +19,7 @@ app.use(cookieParser())
 app.post("/refresh-token", async (req, res) => {
     const token = req.cookies["refresh"]
     console.log("refresh", token)
-    if (!token) return { ok: false, accessToken: "" }
+    if (!token) return res.send({ ok: false, accessToken: "" })
     try {
         console.log("verifying refreshed")
         const { id, tokenVersion } = verifyRefreshToken(token)
